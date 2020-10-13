@@ -17,15 +17,16 @@ const KELVIN = 273;
 const key = "5e56deef12d1454ff584dbb6e5f32d54";
 
 //if supports geolocation
-if('geolocation' in navigator){
+if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition(setPosition, showError);
-}else{
+} else {
     notificationElement.style.display = "block";
-    notificationElement.innerHTML = "<p><img src='icons/sad.png'/> IT WONT WORK!!!!!</p>"
+    notificationElement.innerHTML =
+        "<p><img src='icons/sad.png'/> IT WONT WORK!!!!!</p>"
 }
 
 //set user positiion
-function setPosition(position){
+function setPosition(position) {
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
 
@@ -34,14 +35,17 @@ function setPosition(position){
 }
 
 //show error when block
-function showError(){
+function showError() {
     notificationElement.style.display = "block";
-    notificationElement.innerHTML = "<p><img src='icons/sad.png'/> IT WONT WORK!!!</p>"
+    notificationElement.innerHTML =
+        "<p><img src='icons/sad.png'/> IT WONT WORK!!!</p>"
 }
 
 //get api data
 function getWeather(latitude, longitude) {
-    let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}`;
+    let api =
+        `https://api.openweathermap.org/data/2.5/weather?` +
+        `lat=${latitude}&lon=${longitude}&appid=${key}`;
 
     fetch(api).then(response => {
         return response.json();
@@ -55,11 +59,11 @@ function getWeather(latitude, longitude) {
     }).then(() => {
         displayWeather();
     })
-} 
+}
 
 
 //display weather to UI
-function displayWeather(){
+function displayWeather() {
     tempElement.innerHTML = `${weather.temperature.value}°<span>C</span>`;
     descElement.innerHTML = weather.description;
     locationElement.innerHTML = `${weather.city}, ${weather.country}`;
